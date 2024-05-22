@@ -49,7 +49,6 @@ const Register = () => {
         }
 
         try {
-            // Check if email or username already exists
             const emailResponse = await axios.get(`http://localhost:5000/users?email=${email}`);
             if (emailResponse.data.length > 0) {
                 setErrors({ email: 'Account already exists' });
@@ -62,7 +61,6 @@ const Register = () => {
                 return;
             }
 
-            // Proceed with registration if no errors
             const response = await axios.post('http://localhost:5000/users', {
                 firstName,
                 lastName,

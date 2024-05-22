@@ -79,7 +79,7 @@ const Login = () => {
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
                     </div>
                     {errors.general && <p className="text-red-500 text-center mb-4">{errors.general}</p>}
-                    <button type="submit" className="w-full bg-[#32834f] text-white px-3 py-2 rounded hover:bg-blue-600">
+                    <button type="submit" className="w-full bg-[#32834f] text-white px-3 py-2 rounded hover:bg-green-600">
                         Sign In
                     </button>
                 </form>
