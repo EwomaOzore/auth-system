@@ -4,8 +4,9 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faIdBadge } from '@fortawesome/free-solid-svg-icons';
-import LoginImage from '../assets/Login.json'
 import Lottie from 'lottie-react';
+import LoginImage from '../assets/Login.json';
+import Success from '../assets/Success.json';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -15,6 +16,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -48,16 +50,20 @@ const Register = () => {
             return;
         }
 
+        setIsLoading(true);
+
         try {
             const emailResponse = await axios.get(`http://localhost:5000/users?email=${email}`);
             if (emailResponse.data.length > 0) {
                 setErrors({ email: 'Account already exists' });
+                setIsLoading(false);
                 return;
             }
 
             const usernameResponse = await axios.get(`http://localhost:5000/users?username=${username}`);
             if (usernameResponse.data.length > 0) {
                 setErrors({ username: 'Username already in use' });
+                setIsLoading(false);
                 return;
             }
 
@@ -69,9 +75,13 @@ const Register = () => {
                 password,
             });
             dispatch({ type: 'REGISTER_SUCCESS', payload: response.data });
-            navigate('/registration-success');
+            // Add a delay before navigating
+            setTimeout(() => {
+                navigate('/registration-success');
+            }, 1500); // 1.5 second delay
         } catch (error) {
             dispatch({ type: 'REGISTER_FAIL', payload: error.message });
+            setIsLoading(false);
         }
     };
 
@@ -151,8 +161,12 @@ const Register = () => {
                         <FontAwesomeIcon icon={faLock} className="absolute right-3 top-3 text-[#4784c1]" />
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
                     </div>
-                    <button type="submit" className="w-full bg-[#32834f] text-white px-3 py-2 rounded hover:bg-green-600">
-                        Sign Up
+                    <button type="submit" className="w-full bg-[#32834f] text-white px-3 py-2 rounded hover:bg-green-600 flex items-center justify-center">
+                        {isLoading ? (
+                            <Lottie animationData={Success} style={{ width: 30, height: 30 }} />
+                        ) : (
+                            'Sign Up'
+                        )}
                     </button>
                 </form>
                 <p className="text-center mt-4">
