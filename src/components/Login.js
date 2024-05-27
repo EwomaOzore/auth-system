@@ -16,6 +16,8 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const validateForm = () => {
         const errors = {};
 
@@ -36,7 +38,7 @@ const Login = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.get(`http://localhost:5000/users?${identifier.includes('@') ? `email=${identifier}` : `username=${identifier}`}`);
+            const response = await axios.get(`${API_URL}/users?${identifier.includes('@') ? `email=${identifier}` : `username=${identifier}`}`);
             const user = response.data[0];
 
             if (user && user.password === password) {

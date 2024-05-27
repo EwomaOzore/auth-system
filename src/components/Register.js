@@ -20,6 +20,8 @@ const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const validateForm = () => {
         const errors = {};
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
@@ -53,21 +55,21 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            const emailResponse = await axios.get(`http://localhost:5000/users?email=${email}`);
+            const emailResponse = await axios.get(`${API_URL}/users?email=${email}`);
             if (emailResponse.data.length > 0) {
                 setErrors({ email: 'Account already exists' });
                 setIsLoading(false);
                 return;
             }
 
-            const usernameResponse = await axios.get(`http://localhost:5000/users?username=${username}`);
+            const usernameResponse = await axios.get(`${API_URL}/users?username=${username}`);
             if (usernameResponse.data.length > 0) {
                 setErrors({ username: 'Username already in use' });
                 setIsLoading(false);
                 return;
             }
 
-            const response = await axios.post('http://localhost:5000/users', {
+            const response = await axios.post(`${API_URL}/users`, {
                 firstName,
                 lastName,
                 username,
