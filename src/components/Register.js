@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faIdBadge } from '@fortawesome/free-solid-svg-icons';
 import Lottie from 'lottie-react';
@@ -77,10 +77,9 @@ const Register = () => {
                 password,
             });
             dispatch({ type: 'REGISTER_SUCCESS', payload: response.data });
-            // Add a delay before navigating
             setTimeout(() => {
                 navigate('/registration-success');
-            }, 1500); // 1.5 second delay
+            }, 3000);
         } catch (error) {
             dispatch({ type: 'REGISTER_FAIL', payload: error.message });
             setIsLoading(false);

@@ -7,6 +7,14 @@
       "username": "Ewoma_O",
       "email": "ewomaozore@gmail.com",
       "password": "ewoma@1234"
+    },
+    {
+      "id": "02e5",
+      "firstName": "Simeon",
+      "lastName": "Ozore",
+      "username": "Simeon12345",
+      "email": "simeon@gmail.com",
+      "password": "simeon@1234"
     }
   ]
 }
