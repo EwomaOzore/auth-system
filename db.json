@@ -15,6 +15,22 @@
       "username": "Simeon12345",
       "email": "simeon@gmail.com",
       "password": "simeon@1234"
+    },
+    {
+      "id": "f41d",
+      "firstName": "John",
+      "lastName": "Doe",
+      "username": "DohnJoe",
+      "email": "johndoe@gmail.com",
+      "password": "johndoe123!"
+    },
+    {
+      "id": "09d4",
+      "firstName": "Solomon",
+      "lastName": "Grundy",
+      "username": "SolomonGrungy",
+      "email": "solomon@gmail.com",
+      "password": "solomon@123"
     }
   ]
 }
